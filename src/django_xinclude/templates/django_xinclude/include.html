@@ -1,0 +1,4 @@
+<div hx-get="{{ url|safe }}" hx-trigger="{{ hx_trigger }}"
+     hx-swap="outerHTML{% if swap_time %} swap:{{ swap_time }}{% endif %}{% if settle_time %} settle:{{ settle_time }}{% endif %}">
+    {% if primary_nodes %}{{ primary_nodes }}{% endif %}
+</div>

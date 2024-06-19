@@ -1,0 +1,4 @@
+{% load xinclude %}
+{% for i in "00" %}
+    {% xinclude "tests/partials/hello.html" %}{% endxinclude %}
+{% endfor %}

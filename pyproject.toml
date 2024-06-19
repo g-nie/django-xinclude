@@ -1,0 +1,117 @@
+[build-system]
+requires = ["flit_core >=3.2,<4"]
+build-backend = "flit_core.buildapi"
+
+[project]
+name = "django-xinclude"
+authors = [{ name = "Giannis Terzopoulos", email = "terzo.giannis@gmail.com" }]
+readme = "README.rst"
+keywords = [
+    "django",
+    "templates",
+    "htmx",
+    "xhr",
+    "cache",
+]
+license = {file = "LICENSE"}
+requires-python = ">=3.10"
+classifiers = [
+    "Development Status :: 1 - Planning",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Framework :: Django",
+    "Framework :: Django :: 4.2",
+    "Framework :: Django :: 5.0",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Typing :: Typed",
+]
+dynamic = ["version", "description"]
+dependencies = ["Django>=4.2"]
+
+[project.urls]
+Changelog = "https://github.com/g-nie/django-xinclude/blob/main/CHANGELOG.rst"
+Repository = "https://github.com/g-nie/django-xinclude"
+
+[project.optional-dependencies]
+tests = [
+    "pytest",
+    "pytest-django",
+    "coverage",
+]
+dev = [
+    "django-stubs[compatible-mypy]",
+    "ipython",
+    "ruff",
+]
+
+# TODO: This is not working for some reason:
+[tool.flit.sdist]
+include = [
+    "CHANGELOG.rst",
+    "LICENSE",
+    "README.rst",
+    "pyproject.toml"
+]
+
+[tool.ruff.lint]
+select = [
+    "E", "F", "I", "W", "N", "B", "A", "C4", "T20", "DJ", "UP",
+    "COM818",  # trailing-comma-on-bare-tuple
+    "RUF006",  # asyncio-dangling-task
+    "RUF013",  # Implicit Optional
+    "RUF015",  # Unnecessary iterable allocation for first element
+    "RUF017",  # Avoid quadratic list summation
+    "RUF019",  # Unnecessary key check
+    "RUF100",  # Unused noqa directive
+]
+ignore = ["DJ008"]  # Model does not define __str__ method
+
+[tool.ruff.lint.isort]
+required-imports = ["from __future__ import annotations"]
+combine-as-imports = true
+order-by-type = true
+no-lines-before = ["local-folder"]
+
+[tool.mypy]
+plugins = ["mypy_django_plugin.main"]
+mypy_path = "src/"
+namespace_packages = false
+show_error_codes = true
+strict = true
+warn_unreachable = true
+
+[[tool.mypy.overrides]]
+module = "tests.*"
+allow_untyped_defs = true
+allow_untyped_calls = true
+disable_error_code = ["var-annotated", "has-type"]
+
+[tool.django-stubs]
+django_settings_module = "tests.settings"
+
+[tool.pytest.ini_options]
+python_files = ["tests.py", "test_*.py"]
+django_find_project = false
+
+[tool.coverage.run]
+branch = true
+source = ["django_xinclude"]
+
+[tool.coverage.paths]
+source = ["src"]
+
+[tool.coverage.report]
+fail_under = 100
+show_missing = true
+ignore_errors = true
+exclude_also = [
+    # Don't complain if tests don't hit defensive assertion code:
+    "raise AssertionError",
+    "raise NotImplementedError",
+    # Nor complain about type checking
+    "if TYPE_CHECKING:",
+]
