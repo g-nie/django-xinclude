@@ -10,4 +10,4 @@ from django_xinclude.logger import logger
 
 __all__ = ["logger"]
 
-__version__ = "0.1.0"
+__version__ = "0.1.1"
