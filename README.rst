@@ -11,10 +11,10 @@ Render a template using htmx with the current context.
 ----
 
 | ``hx-get`` is often used to delegate potentially computationally expensive template fragments to ``htmx``.
-  Achieving this sometimes requires the creation of multiple views, each of which needs to inherit from mixins that
+  Achieving this sometimes requires more views, each of which needs to inherit from mixins that
   provide access to the same context.
 | ``django-xinclude`` provides a template tag that aims to make this easier by leveraging the cache,
-  removing the need for the extra views.
+  removing the need for the views.
 
 ----
 
@@ -158,7 +158,7 @@ This way you don't need to repeat the ``{% load xinclude %}`` in every template 
 How It Works
 ------------
 ``django-xinclude`` first checks if it needs to render the target template synchronously;
-see the `Rendering synchronously <#rendering-synchronously>`__ section for cases where this might be useful.
+see the `Section below <#rendering-synchronously>`__ for cases where this might be useful.
 If this is not the case, it stores the current context and the target template to the cache and constructs a url
 with a ``fragment_id`` that targets an internal view. It then renders a parent ``div`` element containing all the
 necessary htmx attributes. Once the htmx request fires, the view fetches the cache context and template that match
@@ -167,7 +167,7 @@ the passed ``fragment_id`` and uses that context to render the template.
 Cache
 ^^^^^
 ``django-xinclude`` uses either the cache that corresponds to the ``XINCLUDE_CACHE_ALIAS`` setting, if specified,
-or the ``CACHES["default"]``.
+or ``CACHES["default"]``.
 When setting a new cache key, it finds unpickable values and discards them.
 If you want to see which keys get discarded, update your ``settings.LOGGERS`` to include ``"django_xinclude"``
 with ``"level": "DEBUG"``.
@@ -204,7 +204,7 @@ The cache alias that ``django-xinclude`` will use, it defaults to ``CACHES["defa
 
 ``XINCLUDE_CACHE_TIMEOUT: int``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-The number of seconds that contexts should be stored in the cache. If the setting is not present, Django will
+The number of seconds that contexts will remain in cache. If the setting is not present, Django will
 use the default timeout argument of the appropriate backend in the ``CACHES`` setting.
 
 ``XINCLUDE_SYNC_REQUEST_ATTR: str``
