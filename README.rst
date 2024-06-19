@@ -145,7 +145,7 @@ This way you don't need to repeat the ``{% load xinclude %}`` in every template 
     TEMPLATES = [
         {
             "BACKEND": "django.template.backends.django.DjangoTemplates",
-            ...,
+            # ...,
             "OPTIONS": {
                 "builtins": [
                     "django_xinclude.templatetags.xinclude",
