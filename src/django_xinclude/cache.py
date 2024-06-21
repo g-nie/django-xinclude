@@ -23,14 +23,14 @@ class ContextCache:
     def get_pickled_context(
         self, ctx: dict[str, Any], fragment_id: str
     ) -> dict[str, Any]:
-        """Iterates over ``ctx`` to discard unpickable elements."""
+        """Iterates over ``ctx`` to discard unpicklable elements."""
         safe_ctx = {}
-        discarded = []
+        discarded = set()
         for k, v in ctx.items():
             try:
                 pickle.dumps(v)
-            except (pickle.PicklingError, TypeError):
-                discarded.append(k)
+            except (pickle.PicklingError, TypeError, AttributeError):
+                discarded.add(k)
             else:
                 safe_ctx[k] = v
         if discarded:

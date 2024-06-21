@@ -106,21 +106,25 @@ class TemplateTagTests(SimpleTestCase):
         self.assertTrue({"foo": "bar", "zoo": "car"}.items() <= ctx["context"].items())
         self.assertEqual(ctx["meta"]["template_names"], ["tests/partials/hello.html"])
 
-    def test_skips_unpickable_objects(self):
+    def test_skips_unpicklable_objects(self):
         template = """
         {% load xinclude %}
         {% xinclude "tests/partials/hello.html" %}{% endxinclude %}
         """
         t = engines["django"].from_string(template)
         with mock.patch("django_xinclude.cache.logger") as logger:
-            t.render({"a": mock.MagicMock(), "b": mock.MagicMock()})
+            t.render({"a": mock.MagicMock(), "b": lambda: None})
         ctx = self.cache.set.mock_calls[0].args[1]["context"]
         self.assertNotIn("a", ctx)
         self.assertNotIn("b", ctx)
-        logger.debug.assert_called_once_with(
-            "The values for the following keys could not get pickled and thus were not "
-            f"stored in cache (fragment_id: {self.fragment_id}): ['a', 'b']"
+        call_msg = logger.debug.mock_calls[0].args[0]
+        self.assertTrue(
+            call_msg.startswith(
+                "The values for the following keys could not get pickled and thus "
+                "were not stored in cache (fragment_id:"
+            )
         )
+        self.assertIn(call_msg.split(":")[-1].strip(), ["{'a', 'b'}", "{'b', 'a'}"])
 
     def test_pickling_typerror_is_tolerated(self):
         unp = TextIOWrapper(mock.MagicMock())

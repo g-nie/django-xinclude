@@ -168,7 +168,7 @@ Cache
 ^^^^^
 ``django-xinclude`` uses either the cache that corresponds to the ``XINCLUDE_CACHE_ALIAS`` setting, if specified,
 or ``CACHES["default"]``.
-When setting a new cache key, it finds unpickable values and discards them.
+When setting a new cache key, it finds unpicklable values and discards them.
 If you want to see which keys get discarded, update your ``settings.LOGGERS`` to include ``"django_xinclude"``
 with ``"level": "DEBUG"``.
 
