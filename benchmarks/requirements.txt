@@ -1,0 +1,9 @@
+Django
+ipython
+requests
+django-debug-toolbar
+redis
+hiredis
+python-dotenv
+
+tuna

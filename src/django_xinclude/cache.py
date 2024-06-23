@@ -20,7 +20,7 @@ class ContextCache:
     def cache(self) -> BaseCache:
         return caches[conf.XINCLUDE_CACHE_ALIAS]
 
-    def get_pickled_context(
+    def get_picklable_context(
         self, ctx: dict[str, Any], fragment_id: str
     ) -> dict[str, Any]:
         """Iterates over ``ctx`` to discard unpicklable elements."""

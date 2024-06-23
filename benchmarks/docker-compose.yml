@@ -1,0 +1,30 @@
+services:
+  django:
+    build:
+      dockerfile: ./benchmarks/config/docker/django/Dockerfile
+      context: ../
+    ports:
+      - 127.0.0.1:9037:9037
+    volumes:
+      - django_bashhistory:/commandhistory
+      - .:/app:consistent
+    networks:
+      - redis_network
+    env_file:
+      - ./config/.env
+    environment:
+      - IPYTHONDIR=/app/config/docker/.ipython
+    stop_grace_period: 0s
+    command: /bin/sh -c "/entrypoint.sh"
+
+  redis:
+    image: redis:7.2.5-alpine
+    restart: unless-stopped
+    networks:
+      - redis_network
+
+volumes:
+  django_bashhistory:
+
+networks:
+  redis_network:

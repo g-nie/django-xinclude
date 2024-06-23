@@ -75,7 +75,7 @@ class HtmxIncludeNode(IncludeNode):
         else:
             with context.push(**values):
                 ctx = context.flatten()  # type: ignore[assignment]
-        ctx = ctx_cache.get_pickled_context(ctx, fragment_id)
+        ctx = ctx_cache.get_picklable_context(ctx, fragment_id)
         ctx_cache.set(fragment_id, {"meta": meta, "context": ctx})
 
     def get_user(self, context: RequestContext) -> AbstractUser | AnonymousUser | None:
@@ -168,7 +168,7 @@ def do_xinclude(parser: Parser, token: Token) -> HtmxIncludeNode:
     context = {**node.extra_context, **options}
     # add the variable defaults to context
     SpecialVariables.make_context_defaults(context, parser)
-    # extract the primary element
+    # extract the primary nodes
     primary_nodelist = parser.parse(["endxinclude"])
     parser.delete_first_token()
 

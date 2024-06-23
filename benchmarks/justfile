@@ -1,0 +1,14 @@
+dc := "docker compose"
+
+@_default:
+    just --list
+@build *options:
+    {{ dc }} build {{ options }}
+@up *options:
+    {{ dc }} up {{ options }}
+@down:
+    {{ dc }} down
+@exec *options:
+    {{ dc }} exec django {{ options }}
+@manage *options:
+    just exec "python manage.py {{ options }}"

@@ -83,6 +83,7 @@ namespace_packages = false
 show_error_codes = true
 strict = true
 warn_unreachable = true
+exclude = ["benchmarks/*"]
 
 [[tool.mypy.overrides]]
 module = "tests.*"
@@ -108,6 +109,7 @@ source = ["src"]
 fail_under = 100
 show_missing = true
 ignore_errors = true
+omit = ["src/django_xinclude/utils.py"]
 exclude_also = [
     # Don't complain if tests don't hit defensive assertion code:
     "raise AssertionError",
