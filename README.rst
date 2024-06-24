@@ -13,10 +13,11 @@ Render a template using htmx with the current context.
 | ``hx-get`` is often used to delegate potentially computationally expensive template fragments to ``htmx``.
   Achieving this sometimes requires more views, each of which needs to inherit from mixins that
   provide access to the same context.
-| ``django-xinclude`` provides a template tag that aims to make this easier by leveraging the cache,
-  removing the need for the views.
+| ``django-xinclude`` provides a template tag that aims to make this easier by leveraging the cache.
 
 ----
+
+*Please note that this package is in a very early, exploratory stage.*
 
 Requirements
 ------------
