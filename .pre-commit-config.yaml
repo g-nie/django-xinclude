@@ -15,18 +15,18 @@ repos:
     exclude_types: [text]
   - id: trailing-whitespace
 - repo: https://github.com/astral-sh/ruff-pre-commit
-  rev: v0.4.7
+  rev: v0.4.10
   hooks:
     - id: ruff
     - id: ruff-format
 - repo: https://github.com/rstcheck/rstcheck
-  rev: v6.2.1
+  rev: v6.2.0
   hooks:
   - id: rstcheck
     additional_dependencies:
     - tomli==2.0.1
 - repo: https://github.com/asottile/pyupgrade
-  rev: v3.15.2
+  rev: v3.16.0
   hooks:
   - id: pyupgrade
     args: [--py310-plus]
