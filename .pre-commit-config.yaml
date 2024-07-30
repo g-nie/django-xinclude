@@ -15,7 +15,7 @@ repos:
     exclude_types: [text]
   - id: trailing-whitespace
 - repo: https://github.com/astral-sh/ruff-pre-commit
-  rev: v0.5.4
+  rev: v0.5.5
   hooks:
     - id: ruff
     - id: ruff-format
@@ -26,7 +26,7 @@ repos:
     additional_dependencies:
     - tomli==2.0.1
 - repo: https://github.com/asottile/pyupgrade
-  rev: v3.16.0
+  rev: v3.17.0
   hooks:
   - id: pyupgrade
     args: [--py310-plus]
