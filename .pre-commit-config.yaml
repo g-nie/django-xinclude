@@ -3,7 +3,7 @@ default_language_version:
 
 repos:
 - repo: https://github.com/pre-commit/pre-commit-hooks
-  rev: v4.6.0
+  rev: v5.0.0
   hooks:
   - id: check-added-large-files
   - id: check-case-conflict
@@ -15,7 +15,7 @@ repos:
     exclude_types: [text]
   - id: trailing-whitespace
 - repo: https://github.com/astral-sh/ruff-pre-commit
-  rev: v0.6.1
+  rev: v0.7.4
   hooks:
     - id: ruff
     - id: ruff-format
@@ -26,17 +26,17 @@ repos:
     additional_dependencies:
     - tomli==2.0.1
 - repo: https://github.com/asottile/pyupgrade
-  rev: v3.17.0
+  rev: v3.19.0
   hooks:
   - id: pyupgrade
     args: [--py310-plus]
 - repo: https://github.com/adamchainz/django-upgrade
-  rev: 1.20.0
+  rev: 1.22.1
   hooks:
   - id: django-upgrade
     args: [--target-version, '4.2']
 - repo: https://github.com/pre-commit/mirrors-mypy
-  rev: v1.11.1
+  rev: v1.13.0
   hooks:
   - id: mypy
     additional_dependencies:
