@@ -5,7 +5,7 @@ build-backend = "flit_core.buildapi"
 [project]
 name = "django-xinclude"
 authors = [{ name = "Giannis Terzopoulos", email = "terzo.giannis@gmail.com" }]
-readme = "README.rst"
+readme = "README.md"
 keywords = [
     "django",
     "templates",
@@ -53,7 +53,7 @@ dev = [
 include = [
     "CHANGELOG.rst",
     "LICENSE",
-    "README.rst",
+    "README.md",
     "pyproject.toml"
 ]
 
