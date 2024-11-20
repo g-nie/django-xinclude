@@ -3,7 +3,7 @@ from __future__ import annotations
 import uuid
 from typing import TYPE_CHECKING, Any
 
-from django.template.base import FilterExpression, Parser, Token, Variable
+from django.template.base import Parser, Token, Variable
 from django.template.library import Library
 from django.template.loader_tags import IncludeNode, do_include
 from django.urls import reverse
@@ -16,7 +16,7 @@ if TYPE_CHECKING:
     from collections.abc import KeysView
 
     from django.contrib.auth.models import AbstractUser, AnonymousUser
-    from django.template.base import NodeList
+    from django.template.base import FilterExpression, NodeList
     from django.template.context import RequestContext
     from django.utils.safestring import SafeString
 
@@ -34,7 +34,7 @@ class SpecialVariables:
     def make_context_defaults(cls, ctx: dict[str, Any], parser: Parser) -> None:
         for key, val in cls._vars.items():
             if val is not None:
-                ctx.setdefault(key, FilterExpression(f'"{val}"', parser))
+                ctx.setdefault(key, parser.compile_filter(f'"{val}"'))
 
     @classmethod
     def keys(cls) -> KeysView[str]:
@@ -156,7 +156,7 @@ def do_xinclude(parser: Parser, token: Token) -> HtmxIncludeNode:
             remaining_bits.append(option)
             continue
         if key in SpecialVariables.raw_list():
-            options[key.replace("-", "_")] = FilterExpression(value, parser)
+            options[key.replace("-", "_")] = parser.compile_filter(value)
         else:
             remaining_bits.append(option)
 
@@ -164,7 +164,7 @@ def do_xinclude(parser: Parser, token: Token) -> HtmxIncludeNode:
         token.token_type, " ".join(remaining_bits), token.position, token.lineno
     )
     node = do_include(parser, token)  # the regular IncludeNode
-    template = FilterExpression('"django_xinclude/include.html"', parser)
+    template = parser.compile_filter('"django_xinclude/include.html"')
     context = {**node.extra_context, **options}
     # add the variable defaults to context
     SpecialVariables.make_context_defaults(context, parser)
