@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from django.test import SimpleTestCase
 from django.test.utils import override_settings
+
 from django_xinclude.conf import conf
 
 
