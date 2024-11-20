@@ -14,6 +14,7 @@ repos:
   - id: end-of-file-fixer
     exclude_types: [text]
   - id: trailing-whitespace
+    exclude_types: [markdown]
 - repo: https://github.com/astral-sh/ruff-pre-commit
   rev: v0.7.4
   hooks:
