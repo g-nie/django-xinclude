@@ -8,6 +8,9 @@ django-xinclude
 
 Render a template using htmx with the current context.
 
+> [!IMPORTANT]
+> This package currently contains minimal features and is a work-in-progress.
+
 ----
 
 | ``hx-get`` is often used to delegate potentially computationally expensive template fragments to ``htmx``.
@@ -15,9 +18,6 @@ Render a template using htmx with the current context.
   provide access to the same context.
 | ``django-xinclude`` provides a template tag that aims to make this easier by leveraging the cache.
 
-----
-
-*Please note that this package is in a very early, exploratory stage.*
 
 Requirements
 ------------
