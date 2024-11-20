@@ -63,19 +63,19 @@ template that you want to include:
 {% xinclude "footer.html" %}{% endxinclude %}
 ```
 
-Every feature of the regular `include`\_\_ tag is supported, including
+Every feature of the regular [`include`](https://docs.djangoproject.com/en/dev/ref/templates/builtins/#include) tag is supported, including
 the use of `with` and `only`.
 
 You can use the following htmx-specific arguments:
 
--   `hx-trigger`: corresponds to the `hx-trigger`\_\_ htmx attribute.
+-   `hx-trigger`: corresponds to the [`hx-trigger`](https://htmx.org/attributes/hx-trigger/) htmx attribute.
     Defaults to `load once`.
--   `swap-time`: corresponds to the `swap` timing of the `hx-swap`\_\_
+-   `swap-time`: corresponds to the `swap` timing of the [`hx-swap`](https://htmx.org/attributes/hx-swap/#timing-swap-settle)
     htmx attribute.
 -   `settle-time`: corresponds to the `settle` timing of the
-    `hx-swap`\_\_ htmx attribute.
+    [`hx-swap`](https://htmx.org/attributes/hx-swap/#timing-swap-settle) htmx attribute.
 
-\"Primary nodes\" may be passed along to render initial content prior to
+"Primary nodes" may be passed along to render initial content prior to
 htmx swapping. For example:
 
 ``` html
@@ -229,13 +229,13 @@ source .venv/bin/activate
 python -m pip install -e '.[tests,dev]'
 ```
 
-Set up the `pre-commit`\_\_ hooks:
+Set up the [`pre-commit`](https://pre-commit.com/) hooks:
 
 ``` sh
 pre-commit install
 ```
 
-Then you can run the tests with the `just`\_\_ command runner:
+Then you can run the tests with the [`just`](https://github.com/casey/just) command runner:
 
 ``` sh
 just test
@@ -252,6 +252,6 @@ the commands that are run.
 
 ## Complementary packages
 
--   `django-htmx`\_\_: Extensions for using Django with htmx.
--   `django-template-partials`\_\_: Reusable named inline partials for
+-   [`django-htmx`](https://github.com/adamchainz/django-htmx) : Extensions for using Django with htmx.
+-   [`django-template-partials`](https://github.com/carltongibson/django-template-partials/): Reusable named inline partials for
     the Django Template Language.
